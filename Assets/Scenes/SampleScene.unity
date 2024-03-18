@@ -499,7 +499,7 @@ GameObject:
   - component: {fileID: 1967594000}
   - component: {fileID: 1967593999}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Test Flipper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
