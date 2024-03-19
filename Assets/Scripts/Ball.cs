@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallBump : MonoBehaviour
+public class Ball : MonoBehaviour
 {
     private Rigidbody theBall;
     private float launchForce = 30;
@@ -12,10 +12,9 @@ public class BallBump : MonoBehaviour
         theBall = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Launch()
     {
-        
+        theBall.AddForce(Vector3.forward * launchForce, ForceMode.Impulse);
     }
 
     private void OnCollisionEnter(Collision collision)
