@@ -35,6 +35,24 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Flipper Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1e0037d-7f87-48c3-860d-86ccdbac9361"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Flipper Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""d24856f2-6d32-42de-8dfd-792a253400ef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -46,6 +64,50 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""BallLaunch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57eda403-e50c-488a-b488-74323b16673b"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flipper Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""30cefeda-3089-4a0d-a0f0-3e8c6cc6d0bb"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flipper Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""991113a8-525e-466c-ae94-db9595b041e1"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flipper Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ccd6a696-2f02-4ddd-80aa-493446a203c5"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flipper Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -118,6 +180,8 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_BallLaunch = m_Player.FindAction("BallLaunch", throwIfNotFound: true);
+        m_Player_FlipperLeft = m_Player.FindAction("Flipper Left", throwIfNotFound: true);
+        m_Player_FlipperRight = m_Player.FindAction("Flipper Right", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -180,11 +244,15 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_BallLaunch;
+    private readonly InputAction m_Player_FlipperLeft;
+    private readonly InputAction m_Player_FlipperRight;
     public struct PlayerActions
     {
         private @GameInputs m_Wrapper;
         public PlayerActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @BallLaunch => m_Wrapper.m_Player_BallLaunch;
+        public InputAction @FlipperLeft => m_Wrapper.m_Player_FlipperLeft;
+        public InputAction @FlipperRight => m_Wrapper.m_Player_FlipperRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -197,6 +265,12 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
             @BallLaunch.started += instance.OnBallLaunch;
             @BallLaunch.performed += instance.OnBallLaunch;
             @BallLaunch.canceled += instance.OnBallLaunch;
+            @FlipperLeft.started += instance.OnFlipperLeft;
+            @FlipperLeft.performed += instance.OnFlipperLeft;
+            @FlipperLeft.canceled += instance.OnFlipperLeft;
+            @FlipperRight.started += instance.OnFlipperRight;
+            @FlipperRight.performed += instance.OnFlipperRight;
+            @FlipperRight.canceled += instance.OnFlipperRight;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -204,6 +278,12 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
             @BallLaunch.started -= instance.OnBallLaunch;
             @BallLaunch.performed -= instance.OnBallLaunch;
             @BallLaunch.canceled -= instance.OnBallLaunch;
+            @FlipperLeft.started -= instance.OnFlipperLeft;
+            @FlipperLeft.performed -= instance.OnFlipperLeft;
+            @FlipperLeft.canceled -= instance.OnFlipperLeft;
+            @FlipperRight.started -= instance.OnFlipperRight;
+            @FlipperRight.performed -= instance.OnFlipperRight;
+            @FlipperRight.canceled -= instance.OnFlipperRight;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -269,5 +349,7 @@ public partial class @GameInputs: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnBallLaunch(InputAction.CallbackContext context);
+        void OnFlipperLeft(InputAction.CallbackContext context);
+        void OnFlipperRight(InputAction.CallbackContext context);
     }
 }

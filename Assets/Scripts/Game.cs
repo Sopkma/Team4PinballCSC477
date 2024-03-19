@@ -6,6 +6,8 @@ public class Game : MonoBehaviour
 {
     private GameInputs input;
     public Ball ball;
+    public Flipper leftFlipper;
+    public Flipper rightFlipper;
 
     void Start()
     {
@@ -15,9 +17,14 @@ public class Game : MonoBehaviour
 
     void Update()
     {
-        if (input.Player.BallLaunch.WasReleasedThisFrame())
-        {
+        if (input.Player.BallLaunch.WasReleasedThisFrame()) {
             ball.Launch();
+        } 
+        else if (input.Player.FlipperRight.WasPressedThisFrame()) {
+            rightFlipper.flip();
+        } 
+        else if (input.Player.FlipperLeft.WasPressedThisFrame()) {
+            leftFlipper.flip();
         }
     }
 }
