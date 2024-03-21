@@ -8,6 +8,7 @@ TagManager:
   - Right Flipper
   - Ball
   - Bumper
+  - GameHUD
   layers:
   - Default
   - TransparentFX

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private Rigidbody theBall;
-    private float launchForce = 30;
+    private float launchForce = 5;
     //private int lives; // lec
     //private const int MAX_LIVES = 3; 
 
@@ -28,7 +28,7 @@ public class Ball : MonoBehaviour
     //    lives = 3;
     //}
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         var bumper = collision.gameObject.GetComponent<Bumper>();
         if (bumper != null)
@@ -37,7 +37,8 @@ public class Ball : MonoBehaviour
             bumper.Bump();
             Game.Instance.AddScore(100);
             // code to bump the ball
-            theBall.AddForce(Vector3.up * launchForce, ForceMode.Impulse);
+            theBall.AddForce(Vector3.forward * launchForce, ForceMode.Impulse);
+            print("ball has added force.");
         }
         else {
             if(collision.gameObject.tag.StartsWith("Flipper")) {
