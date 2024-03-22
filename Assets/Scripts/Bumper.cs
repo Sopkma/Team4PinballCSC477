@@ -8,7 +8,18 @@ public class Bumper : MonoBehaviour
 {
     private float BumperTransitionTimer;
     private Renderer BumperTextureRenderer;
-    private Color Purple = new Color(128f, 0f, 128f);
+
+    // RGB colors from the Citrink palette
+    // note all custom colors seem to break the bumper color change for some reason...?
+    private Color White = Color.white;
+    private Color Yellow = new Color(252f, 246f, 96f);
+    private Color Lime = new Color(178f, 217f, 66f);
+    private Color Green = new Color(82f, 195f, 63f);
+    private Color LighterBlue = new Color(22f, 110f, 122f);
+    private Color DarkerBlue = new Color(37f, 77f, 112f);
+    private Color LighterPurple = new Color(37f, 36f, 70f);
+    private Color DarkerPurple = new Color(32f, 21f, 51f);
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +34,7 @@ public class Bumper : MonoBehaviour
     {
         if (BumperTransitionTimer > 0)
         {
-            Color color = Color.Lerp(Color.blue, Color.red, BumperTransitionTimer);
+            Color color = Color.Lerp(Color.blue, White, BumperTransitionTimer);
             BumperTextureRenderer.material.SetColor("_BaseColor", color);
             BumperTransitionTimer -= Time.deltaTime / 2.0f;
             if (BumperTransitionTimer < 0)
@@ -36,6 +47,6 @@ public class Bumper : MonoBehaviour
     public void Bump()
     {
         BumperTransitionTimer = 1;
-        BumperTextureRenderer.material.SetColor("_BaseColor", Color.red);
+        BumperTextureRenderer.material.SetColor("_BaseColor", White);
     }
 }
