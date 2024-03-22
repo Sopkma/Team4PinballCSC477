@@ -9,6 +9,8 @@ TagManager:
   - Ball
   - Bumper
   - GameHUD
+  - Ball End
+  - Ball Start
   layers:
   - Default
   - TransparentFX

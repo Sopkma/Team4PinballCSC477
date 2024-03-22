@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private Rigidbody theBall;
-    private float launchForce = 5;
+    public float launchForce;
     //private int lives; // lec
     //private const int MAX_LIVES = 3; 
 
