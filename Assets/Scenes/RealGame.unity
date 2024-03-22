@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75bc541e0e8442f42a63c503513ba4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 0}
+  ball: {fileID: 1774900639}
   leftFlipper: {fileID: 1967594005}
   rightFlipper: {fileID: 1790664151}
   score: {fileID: 914054299}
