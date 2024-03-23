@@ -4,27 +4,31 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    [HideInInspector] public GameInputs input; // lecture
+    [HideInInspector] public GameInputs input; 
     public Ball ball;
     public Flipper leftFlipper;
     public Flipper rightFlipper;
     public Score score; // lec
 
-    public static Game Instance { get; private set; } // lecture
+    public static Game Instance { get; private set; } 
 
-    void Awake() // awake starts first over start lecture
+    public int CurScore { get; private set; }
+    public int HighScore { get; private set; }
+
+    private void Awake() // awake starts first over start lecture
     {
         input = new GameInputs();
         input.Enable();
         Instance = this; // lecture
     }
 
+    //private void Start() {
+    //    HighScore = PlayerPrefs.GetInt(PlayerPrefs.HighScore, 0);
+    //}
+
     void Update()
     {
-        if (input.Player.BallLaunch.WasReleasedThisFrame()) {
-            ball.Launch();
-        } 
-        else if (input.Player.FlipperRight.WasPressedThisFrame()) {
+        if (input.Player.FlipperRight.WasPressedThisFrame()) {
             rightFlipper.flip();
         } 
         else if (input.Player.FlipperLeft.WasPressedThisFrame()) {
@@ -34,5 +38,9 @@ public class Game : MonoBehaviour
 
     public void AddScore(int amount) {
         score.AddScore(amount);
+        CurScore += amount;
+        if (CurScore >= HighScore) {
+            HighScore = CurScore;
+        }
     }
 }

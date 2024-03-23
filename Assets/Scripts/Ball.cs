@@ -7,27 +7,60 @@ public class Ball : MonoBehaviour
     private Rigidbody theBall;
     public float launchForce;
     public float bumperForce;
-    //private int lives; // lec
-    //private const int MAX_LIVES = 3; 
+    private int lives;
+    private const int MAX_LIVES = 3;
+    private bool canBeLaunched;
 
     public Menu menu;
-    // Start is called before the first frame update
+    
     void Start()
     {
-    //    lives = MAX_LIVES;
+        lives = MAX_LIVES;
         theBall = GetComponent<Rigidbody>();
+
+        canBeLaunched = true;
+    }
+
+    private void Update() {
+        var input = Game.Instance.input;
+        if (canBeLaunched && input.Player.BallLaunch.WasReleasedThisFrame()) {
+            Launch();
+        }
     }
 
     public void Launch()
     {
-        theBall.AddForce(Vector3.forward * launchForce, ForceMode.Impulse);
+        float randomLaunch = Random.Range(launchForce * 0.5f, launchForce * 2.0f); // Randomizes the balls launch power
+        theBall.AddForce(Vector3.forward * randomLaunch, ForceMode.Impulse);
+        canBeLaunched = false;
     }
 
-    //public void Restart() {
-    //    transform.position - GameObject.FindGameObjectsWithTag("BallStart").transform.position;
-    //    theBall.velocity = Vector3.zero;
-    //    lives = 3;
-    //}
+    public void ResetBall() {
+        transform.position = GameObject.FindGameObjectWithTag("Ball Start").transform.position;
+        theBall.velocity = Vector3.zero;
+
+        lives--;
+        print("lost a life");
+        if (lives < 0) {
+            menu.GameOver();
+        } else {
+            canBeLaunched = true;
+        }
+    }
+
+    public void RestartGame() {
+        transform.position = GameObject.FindGameObjectWithTag("Ball Start").transform.position;
+        theBall.velocity = Vector3.zero;
+
+        lives = MAX_LIVES;
+        canBeLaunched = true;
+    }
+
+    public void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Ball End")) {
+            ResetBall();
+        }
+    }
 
     public void OnCollisionEnter(Collision collision)
     {
@@ -36,18 +69,15 @@ public class Ball : MonoBehaviour
         {
             print("ball collided with bumper.");
             bumper.Bump();
-            // I'm commenting out this AddSCore function because it currently does not work, and
-            // it prevents the script from functioning properly.
-            //Game.Instance.AddScore(100);
+            Game.Instance.AddScore(100);
 
             // code to bump the ball
-
             //theBall.AddForce(new Vector3(-theBall.transform.position.x / 2f, theBall.transform.position.y, (-theBall.transform.position.z / 2f) + bumperForce) * bumperForce, ForceMode.Impulse);
             theBall.AddForce(Vector3.forward * bumperForce, ForceMode.Impulse);
             print("ball has added force.");
         }
         else {
-            if(collision.gameObject.tag.StartsWith("Flipper")) {
+            if (collision.gameObject.tag.StartsWith("Flipper")) {
                 Game.Instance.AddScore(10);
             }
         }

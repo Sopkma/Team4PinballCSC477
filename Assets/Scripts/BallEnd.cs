@@ -25,6 +25,7 @@ public class NewBehaviourScript : MonoBehaviour
             theBall.transform.position = GameObject.FindGameObjectWithTag("Ball Start").transform.position;
             theBall.velocity = Vector3.zero;
             print("Ball has teleported and its speed is reset.");
+            
         }
     }
 }
