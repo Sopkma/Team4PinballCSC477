@@ -11,6 +11,7 @@ TagManager:
   - GameHUD
   - Ball End
   - Ball Start
+  - Bonus circle
   layers:
   - Default
   - TransparentFX

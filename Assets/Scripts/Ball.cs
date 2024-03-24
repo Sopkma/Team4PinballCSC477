@@ -30,7 +30,7 @@ public class Ball : MonoBehaviour
 
     public void Launch()
     {
-        float randomLaunch = Random.Range(launchForce * 0.7f, launchForce * 2.0f); // Randomizes the balls launch power
+        float randomLaunch = Random.Range(launchForce * 0.9f, launchForce * 1.5f); // Randomizes the balls launch power
         theBall.AddForce(Vector3.forward * randomLaunch, ForceMode.Impulse);
         canBeLaunched = false;
     }
@@ -60,6 +60,10 @@ public class Ball : MonoBehaviour
         if (other.CompareTag("Ball End")) {
             ResetBall();
         }
+        else if (other.CompareTag("Bonus circle"))
+        {
+            Game.Instance.AddScore(500);
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -76,10 +80,10 @@ public class Ball : MonoBehaviour
             theBall.AddForce(Vector3.forward * bumperForce, ForceMode.Impulse);
             print("ball has added force.");
         }
-        else {
-            if (collision.gameObject.tag.StartsWith("Flipper")) {
-                Game.Instance.AddScore(10);
-            }
+        else if (collision.gameObject.tag.StartsWith("Flipper")) {
+            Game.Instance.AddScore(10);
         }
+
     }
+
 }
