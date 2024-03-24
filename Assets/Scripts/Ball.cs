@@ -30,7 +30,7 @@ public class Ball : MonoBehaviour
 
     public void Launch()
     {
-        float randomLaunch = Random.Range(launchForce * 0.5f, launchForce * 2.0f); // Randomizes the balls launch power
+        float randomLaunch = Random.Range(launchForce * 0.7f, launchForce * 2.0f); // Randomizes the balls launch power
         theBall.AddForce(Vector3.forward * randomLaunch, ForceMode.Impulse);
         canBeLaunched = false;
     }
