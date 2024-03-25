@@ -3,27 +3,29 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum ScoreType {
+    CURRENT,
+    HIGH
+}
+
+[RequireComponent(typeof(TextMeshProUGUI))]
 public class Score : MonoBehaviour
 {
+    public ScoreType type;
     private TextMeshProUGUI txt;
-    private int currentScore;
-    public HighScore highScore;
 
     // Start is called before the first frame update
     void Start()
     {
         txt = GetComponent<TextMeshProUGUI>();
-        currentScore = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        txt.text = currentScore.ToString();
-    }
-
-    public void AddScore(int amount) {
-        currentScore += amount;
-        highScore.SubmitScore(currentScore);
+        if (type == ScoreType.CURRENT) {
+            txt.text = Game.Instance.CurScore.ToString();
+        } else if (type == ScoreType.HIGH) {
+            txt.text = Game.Instance.HighScore.ToString();
+        }
     }
 }

@@ -6,8 +6,6 @@ public class Game : MonoBehaviour
 {
     [HideInInspector] public GameInputs input; 
     public Ball ball;
-    public Flipper leftFlipper;
-    public Flipper rightFlipper;
     public Score score; // lec
 
     public static Game Instance { get; private set; } 
@@ -15,29 +13,22 @@ public class Game : MonoBehaviour
     public int CurScore { get; private set; }
     public int HighScore { get; private set; }
 
-    private void Awake() // awake starts first over start lecture
+    private void Awake() // awake starts first over start
     {
         input = new GameInputs();
         input.Enable();
         Instance = this; // lecture
     }
 
-    //private void Start() {
-    //    HighScore = PlayerPrefs.GetInt(PlayerPrefs.HighScore, 0);
-    //}
+    private void Start() {
+        HighScore = PlayerPrefs.GetInt(Constants.PlayerPrefs.HighScore, 0);
+    }
 
-    void Update()
-    {
-        if (input.Player.FlipperRight.WasPressedThisFrame()) {
-            rightFlipper.flip();
-        } 
-        else if (input.Player.FlipperLeft.WasPressedThisFrame()) {
-            leftFlipper.flip();
-        }
+    private void OnDisable() {
+        PlayerPrefs.SetInt(Constants.PlayerPrefs.HighScore, HighScore);
     }
 
     public void AddScore(int amount) {
-        score.AddScore(amount);
         CurScore += amount;
         if (CurScore >= HighScore) {
             HighScore = CurScore;
