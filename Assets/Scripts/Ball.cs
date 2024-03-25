@@ -80,7 +80,7 @@ public class Ball : MonoBehaviour
             theBall.AddForce(Vector3.forward * bumperForce, ForceMode.Impulse);
             print("ball has added force.");
         }
-        else if (collision.gameObject.tag.StartsWith("Flipper")) {
+        else if (collision.gameObject.tag.StartsWith("Left") || collision.gameObject.tag.StartsWith("Right")) {
             Game.Instance.AddScore(10);
         }
 
