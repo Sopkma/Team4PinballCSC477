@@ -9,6 +9,8 @@ public class Bumper : MonoBehaviour
     private float BumperTransitionTimer;
     private Renderer BumperTextureRenderer;
 
+    public int colorChoice;
+
     // RGB colors from the Citrink palette
     // NOTE: values must be between 0 and 1
     private Color White = Color.white;
@@ -26,7 +28,7 @@ public class Bumper : MonoBehaviour
     {
         BumperTransitionTimer = 0;
         BumperTextureRenderer = GetComponent<Renderer>();
-        BumperTextureRenderer.material.SetColor("_BaseColor", DarkerPurple);
+        //BumperTextureRenderer.material.SetColor("_BaseColor", DarkerPurple);
     }
 
     // Update is called once per frame
@@ -34,9 +36,31 @@ public class Bumper : MonoBehaviour
     {
         if (BumperTransitionTimer > 0)
         {
-            Color color = Color.Lerp(DarkerPurple, Yellow, BumperTransitionTimer);
-            BumperTextureRenderer.material.SetColor("_BaseColor", color);
-            BumperTransitionTimer -= Time.deltaTime / 2.0f;
+            if (colorChoice == 1)
+            {
+                Color color = Color.Lerp(LighterPurple, LighterBlue, BumperTransitionTimer);
+                BumperTextureRenderer.material.SetColor("_BaseColor", color);
+                BumperTransitionTimer -= Time.deltaTime / 2.0f;
+            }
+            else if (colorChoice == 2)
+            {
+                Color color = Color.Lerp(LighterPurple, Lime, BumperTransitionTimer);
+                BumperTextureRenderer.material.SetColor("_BaseColor", color);
+                BumperTransitionTimer -= Time.deltaTime / 2.0f;
+            } 
+            else if (colorChoice == 3)
+            {
+                Color color = Color.Lerp(LighterPurple, White, BumperTransitionTimer);
+                BumperTextureRenderer.material.SetColor("_BaseColor", color);
+                BumperTransitionTimer -= Time.deltaTime / 2.0f;
+            }
+            else
+            {
+                Color color = Color.Lerp(LighterPurple, Yellow, BumperTransitionTimer);
+                BumperTextureRenderer.material.SetColor("_BaseColor", color);
+                BumperTransitionTimer -= Time.deltaTime / 2.0f;
+            }
+            
             if (BumperTransitionTimer < 0)
             {
                 BumperTransitionTimer = 0;

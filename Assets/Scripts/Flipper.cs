@@ -28,7 +28,16 @@ public class Flipper : MonoBehaviour
         }
     }
 
+    // original flip function
+    /*
     public void Flip() {
         rb.AddForce(Vector3.forward * power, ForceMode.Impulse); // apply the force to move the flipper
     }
+    */
+    // edit for new flipper
+    public void Flip()
+    {
+        rb.AddForce(Vector3.right * power, ForceMode.Impulse); // apply the force to move the flipper
+    }
+
 }
