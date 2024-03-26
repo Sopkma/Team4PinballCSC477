@@ -11,10 +11,12 @@ public class Flipper : MonoBehaviour
 
     private Rigidbody rb;
     public float power;
+    private AudioSource audioSrc;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSrc = GetComponent<AudioSource>();
     }
 
     void Update() {
@@ -38,6 +40,7 @@ public class Flipper : MonoBehaviour
     public void Flip()
     {
         rb.AddForce(Vector3.right * power, ForceMode.Impulse); // apply the force to move the flipper
+        audioSrc.Play();    
     }
 
 }

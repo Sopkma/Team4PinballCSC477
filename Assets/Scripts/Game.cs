@@ -10,7 +10,7 @@ public class Game : MonoBehaviour
 
     public static Game Instance { get; private set; } 
 
-    public int CurScore { get; private set; }
+    public int CurScore { get; set; }
     public int HighScore { get; private set; }
 
     private void Awake() // awake starts first over start

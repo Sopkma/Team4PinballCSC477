@@ -34,5 +34,6 @@ public class Menu : MonoBehaviour
         gameoverMenu.SetActive(false);
         gameHUD.SetActive(true);
         Game.Instance.input.Enable();
+        Game.Instance.CurScore = 0;
     }
 }

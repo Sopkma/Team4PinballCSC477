@@ -10,6 +10,7 @@ public class Ball : MonoBehaviour
     [HideInInspector] public int lives;
     private const int MAX_LIVES = 3;
     private bool canBeLaunched;
+    private AudioSource audioSrc;
 
     public Menu menu;
     
@@ -19,6 +20,7 @@ public class Ball : MonoBehaviour
         theBall = GetComponent<Rigidbody>();
 
         canBeLaunched = true;
+        audioSrc = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -33,6 +35,7 @@ public class Ball : MonoBehaviour
         float randomLaunch = Random.Range(launchForce * 0.8f, launchForce * 1.2f); // Randomizes the balls launch power
         theBall.AddForce(Vector3.forward * randomLaunch, ForceMode.Impulse);
         canBeLaunched = false;
+        audioSrc.Play();
     }
 
     public void ResetBall() {
@@ -64,6 +67,7 @@ public class Ball : MonoBehaviour
         {
             print("Hit a score circle.");
             Game.Instance.AddScore(500);
+            audioSrc.Play();
         }
     }
 

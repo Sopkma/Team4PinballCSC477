@@ -9,6 +9,7 @@ public class Bumper : MonoBehaviour
     private float BumperTransitionTimer;
     private Renderer BumperTextureRenderer;
     private Color bumperOGColor;
+    private AudioSource audioSrc;
 
     public int colorChoice;
 
@@ -30,6 +31,7 @@ public class Bumper : MonoBehaviour
         BumperTransitionTimer = 0;
         BumperTextureRenderer = GetComponent<Renderer>();
         bumperOGColor = BumperTextureRenderer.material.color;
+        audioSrc = GetComponent<AudioSource>();
         //BumperTextureRenderer.material.SetColor("_BaseColor", DarkerPurple);
     }
 
@@ -74,5 +76,6 @@ public class Bumper : MonoBehaviour
     {
         BumperTransitionTimer = 1;
         BumperTextureRenderer.material.SetColor("_BaseColor", Yellow);
+        audioSrc.Play();
     }
 }
