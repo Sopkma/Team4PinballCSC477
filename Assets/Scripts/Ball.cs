@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour
     private Rigidbody theBall;
     public float launchForce;
     public float bumperForce;
-    private int lives;
+    [HideInInspector] public int lives;
     private const int MAX_LIVES = 3;
     private bool canBeLaunched;
 
@@ -41,7 +41,7 @@ public class Ball : MonoBehaviour
 
         lives--;
         print("lost a life");
-        if (lives < 0) {
+        if (lives <= 0) {
             menu.GameOver();
         } else {
             canBeLaunched = true;
@@ -62,6 +62,7 @@ public class Ball : MonoBehaviour
         }
         else if (other.CompareTag("Bonus circle"))
         {
+            print("Hit a score circle.");
             Game.Instance.AddScore(500);
         }
     }

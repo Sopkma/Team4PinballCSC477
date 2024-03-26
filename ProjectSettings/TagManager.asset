@@ -12,6 +12,7 @@ TagManager:
   - Ball End
   - Ball Start
   - Bonus circle
+  - Tube Door
   layers:
   - Default
   - TransparentFX

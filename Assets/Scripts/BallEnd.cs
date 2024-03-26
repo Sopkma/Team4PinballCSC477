@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class BallEnd : MonoBehaviour
 {
+    private GameObject tubeDoor;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        tubeDoor = GameObject.FindGameObjectWithTag("Tube Door");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -25,6 +22,17 @@ public class NewBehaviourScript : MonoBehaviour
             theBall.transform.position = GameObject.FindGameObjectWithTag("Ball Start").transform.position;
             theBall.velocity = Vector3.zero;
             print("Ball has teleported and its speed is reset.");
+
+            if (tubeDoor != null)
+            {
+                tubeDoor.SetActive(false);
+            }
+            else
+            {
+                tubeDoor = GameObject.FindGameObjectWithTag("Tube Door");
+                tubeDoor.SetActive(false);
+            }
+            
             
         }
     }

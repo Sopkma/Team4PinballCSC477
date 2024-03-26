@@ -8,6 +8,7 @@ public class Bumper : MonoBehaviour
 {
     private float BumperTransitionTimer;
     private Renderer BumperTextureRenderer;
+    private Color bumperOGColor;
 
     public int colorChoice;
 
@@ -28,6 +29,7 @@ public class Bumper : MonoBehaviour
     {
         BumperTransitionTimer = 0;
         BumperTextureRenderer = GetComponent<Renderer>();
+        bumperOGColor = BumperTextureRenderer.material.color;
         //BumperTextureRenderer.material.SetColor("_BaseColor", DarkerPurple);
     }
 
@@ -38,25 +40,25 @@ public class Bumper : MonoBehaviour
         {
             if (colorChoice == 1)
             {
-                Color color = Color.Lerp(LighterPurple, LighterBlue, BumperTransitionTimer);
+                Color color = Color.Lerp(bumperOGColor, LighterBlue, BumperTransitionTimer);
                 BumperTextureRenderer.material.SetColor("_BaseColor", color);
                 BumperTransitionTimer -= Time.deltaTime / 2.0f;
             }
             else if (colorChoice == 2)
             {
-                Color color = Color.Lerp(LighterPurple, Lime, BumperTransitionTimer);
+                Color color = Color.Lerp(bumperOGColor, Green, BumperTransitionTimer);
                 BumperTextureRenderer.material.SetColor("_BaseColor", color);
                 BumperTransitionTimer -= Time.deltaTime / 2.0f;
             } 
             else if (colorChoice == 3)
             {
-                Color color = Color.Lerp(LighterPurple, White, BumperTransitionTimer);
+                Color color = Color.Lerp(bumperOGColor, White, BumperTransitionTimer);
                 BumperTextureRenderer.material.SetColor("_BaseColor", color);
                 BumperTransitionTimer -= Time.deltaTime / 2.0f;
             }
             else
             {
-                Color color = Color.Lerp(LighterPurple, Yellow, BumperTransitionTimer);
+                Color color = Color.Lerp(bumperOGColor, Yellow, BumperTransitionTimer);
                 BumperTextureRenderer.material.SetColor("_BaseColor", color);
                 BumperTransitionTimer -= Time.deltaTime / 2.0f;
             }
