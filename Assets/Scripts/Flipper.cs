@@ -40,7 +40,7 @@ public class Flipper : MonoBehaviour
     public void Flip()
     {
         rb.AddForce(Vector3.right * power, ForceMode.Impulse); // apply the force to move the flipper
-        audioSrc.Play();    
+        audioSrc.Play();
     }
 
 }
